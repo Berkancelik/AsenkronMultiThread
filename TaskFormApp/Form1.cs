@@ -42,17 +42,17 @@ namespace TaskFormApp
             return data;
         }
 
-        private async Task<string> ReadFileAsync()
-        {
-            string data = string.Empty;
-            using (StreamReader s = new StreamReader("TextFile1.txt"))
-            {
-                Task<string> myTask = s.ReadToEndAsync();
+        //private async Task<string> ReadFileAsync()
+        //{
+        //    string data = string.Empty;
+        //    using (StreamReader s = new StreamReader("TextFile1.txt"))
+        //    {
+        //        Task<string> myTask = s.ReadToEndAsync();
+        //        myTask.Wait();
+        //        data = await myTask;
 
-                data = await myTask;
-
-            }
-        }
+        //    }
+        //}
 
 
     }

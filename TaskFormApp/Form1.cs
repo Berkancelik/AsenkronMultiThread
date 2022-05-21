@@ -42,6 +42,11 @@ namespace TaskFormApp
             return data;
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         //private async Task<string> ReadFileAsync()
         //{
         //    string data = string.Empty;

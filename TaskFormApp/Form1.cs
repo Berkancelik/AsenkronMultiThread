@@ -42,6 +42,18 @@ namespace TaskFormApp
             return data;
         }
 
+        private Task<string> ReadFileAsync2()
+        {
+            using (StreamReader s = new StreamReader("TextFile1.txt"))
+            {
+                return s.ReadToEndAsync();
+            }
+
+        }
+
+
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
 

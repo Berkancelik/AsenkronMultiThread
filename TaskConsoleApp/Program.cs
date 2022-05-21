@@ -33,10 +33,10 @@ namespace TaskConsoleApp
             });
 
             Console.WriteLine("WaitAll methodundan önce");
-            bool result = Task.WaitAll(taskList.ToArray(),300);
-            Console.WriteLine("3 saniiye de geldi mi " + result);
-            Console.WriteLine("WaitAll methodundan sonra");
-            Console.WriteLine($"{taskList.First().Result.Site} - {taskList.First().Result.Length}");
+
+            var firstTakeIndex = Task.WaitAny(taskList.ToArray());
+
+            Console.WriteLine($"{taskList.First().Result.Site} - {taskList[firstTakeIndex].Result.Length}");
 
             
         }

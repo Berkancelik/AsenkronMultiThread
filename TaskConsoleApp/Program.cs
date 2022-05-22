@@ -34,6 +34,14 @@ namespace TaskConsoleApp
 
             Console.WriteLine("WaitAll methodundan önce");
 
+            var content = await Task.WhenAll(taskList.ToArray());
+
+            content.ToList().ForEach(x =>
+            {
+                Console.WriteLine(x.Site);
+
+            });
+
             var firstTakeIndex = Task.WaitAny(taskList.ToArray());
 
             Console.WriteLine($"{taskList.First().Result.Site} - {taskList[firstTakeIndex].Result.Length}");
@@ -44,6 +52,7 @@ namespace TaskConsoleApp
         {
             Content content = new Content();
             var data = await new HttpClient().GetStringAsync(url);
+            await Task.Delay(1000);
             content.Site = url;
             content.Length = data.Length;
             // Thread.CurrentThread.ManagedThreadId); çalışan thread'in id'sini almaktadır.

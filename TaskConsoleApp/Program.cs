@@ -20,21 +20,9 @@ namespace TaskConsoleApp
 
     internal class Program
     {
-       
+
         private async Task Main(string[] args)
         {
-            var myTask = Task.Factory.StartNew((objectobj) =>
-            {
-                Console.WriteLine("myTask çalıştır");
-                var status = objectobj as Status;
-                status.TheradId = Thread.CurrentThread.ManagedThreadId;
-
-            },new Status() { Date = DateTime.Now });
-            await myTask;
-
-            Status s = myTask.AsyncState as Status;
-            Console.WriteLine(s.Date);
-            Console.WriteLine(s.TheradId);
         }
 
 

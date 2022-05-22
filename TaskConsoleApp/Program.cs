@@ -12,53 +12,35 @@ namespace TaskConsoleApp
         public string Site { get; set; }
         public int Length { get; set; }
     }
+    public class Status
+    {
+        public int TheradId { get; set; }
+        public DateTime Date { get; set; }
+    }
+
     internal class Program
     {
-        private async static Task Main(string[] args)
+       
+        private async Task Main(string[] args)
         {
-            Console.WriteLine("Main thread :" + Thread.CurrentThread.ManagedThreadId);
-            List<string> urlsList = new List<string>()
+            var myTask = Task.Factory.StartNew((objectobj) =>
             {
-                "https://www.google.com",
-                "https://www.microsoft.com",
-                "https://www.n11.com",
-                "https://www.haberturk.com"
-            };
-            
-            List<Task<Content>> taskList = new List<Task<Content>>();
+                Console.WriteLine("myTask çalıştır");
+                var status = objectobj as Status;
+                status.TheradId = Thread.CurrentThread.ManagedThreadId;
 
-            urlsList.ToList().ForEach(x =>
-            {
-                taskList.Add(GetContentAsync(x));
-            });
+            },new Status() { Date = DateTime.Now });
+            await myTask;
 
-            Console.WriteLine("WaitAll methodundan önce");
-
-            var content = await Task.WhenAll(taskList.ToArray());
-
-            content.ToList().ForEach(x =>
-            {
-                Console.WriteLine(x.Site);
-
-            });
-
-            var firstTakeIndex = Task.WaitAny(taskList.ToArray());
-
-            Console.WriteLine($"{taskList.First().Result.Site} - {taskList[firstTakeIndex].Result.Length}");
-
-            
+            Status s = myTask.AsyncState as Status;
+            Console.WriteLine(s.Date);
+            Console.WriteLine(s.TheradId);
         }
-        public static async Task<Content> GetContentAsync(string url)
-        {
-            Content content = new Content();
-            var data = await new HttpClient().GetStringAsync(url);
-            await Task.Delay(1000);
-            content.Site = url;
-            content.Length = data.Length;
-            // Thread.CurrentThread.ManagedThreadId); çalışan thread'in id'sini almaktadır.
-            Console.WriteLine("GetContentAsync theread:" + Thread.CurrentThread.ManagedThreadId);
-            return content;
-        }
+
+
+
+
+
     }
 
 

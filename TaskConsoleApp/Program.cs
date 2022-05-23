@@ -10,20 +10,16 @@ namespace TaskConsoleApp
   
     internal class Program
     {
-        public static int cachedata { get; set; } = 150;
-
         private async static Task Main(string[] args)
         {
 
-            var myTask = GetData();
         }
 
-        public static ValueTask<int> GetData()
+        public async Task<string> GetContent()
         {
-            return new ValueTask<int>(cachedata);
+            var content = await new HttpClient().GetStringAsync("https://www.google.com");
+            return content;
         }
-
-     
 
 
 

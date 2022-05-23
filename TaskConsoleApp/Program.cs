@@ -23,16 +23,18 @@ namespace TaskConsoleApp
 
         private async Task Main(string[] args)
         {
-            Console.WriteLine(GetData());
+            Task myTask = Task.Run(() =>
+            {
+                Console.WriteLine("My Task çalıştı");
+            });
+
+            await myTask;
+            Console.WriteLine("işlem birri");
+
+            
         }
 
-        public static string GetData()
-        {
-            var task = new HttpClient().GetStringAsync("https://www.google.com");
-
-            return task.Result;
-        }
-
+     
 
 
 

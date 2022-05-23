@@ -7,31 +7,20 @@ using System.Threading.Tasks;
 
 namespace TaskConsoleApp
 {
-    public class Content
-    {
-        public string Site { get; set; }
-        public int Length { get; set; }
-    }
-    public class Status
-    {
-        public int TheradId { get; set; }
-        public DateTime Date { get; set; }
-    }
-
+  
     internal class Program
     {
+        public static int cachedata { get; set; } = 150;
 
-        private async Task Main(string[] args)
+        private async static Task Main(string[] args)
         {
-            Task myTask = Task.Run(() =>
-            {
-                Console.WriteLine("My Task çalıştı");
-            });
 
-            await myTask;
-            Console.WriteLine("işlem birri");
+            var myTask = GetData();
+        }
 
-            
+        public static ValueTask<int> GetData()
+        {
+            return new ValueTask<int>(cachedata);
         }
 
      

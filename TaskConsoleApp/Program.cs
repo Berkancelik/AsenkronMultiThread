@@ -23,8 +23,15 @@ namespace TaskConsoleApp
 
         private async Task Main(string[] args)
         {
+            Console.WriteLine(GetData());
         }
 
+        public static string GetData()
+        {
+            var task = new HttpClient().GetStringAsync("https://www.google.com");
+
+            return task.Result;
+        }
 
 
 

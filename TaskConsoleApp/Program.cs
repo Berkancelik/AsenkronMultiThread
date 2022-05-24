@@ -13,13 +13,16 @@ namespace TaskConsoleApp
         private async static Task Main(string[] args)
         {
 
+            int deger;
+
+            Parallel.ForEach(Enumerable.Range(0, 100), (x) =>
+            {
+                deger = x;
+                Console.WriteLine(deger);
+            });
+
         }
 
-        public async Task<string> GetContent()
-        {
-            var content = await new HttpClient().GetStringAsync("https://www.google.com");
-            return content;
-        }
 
 
 

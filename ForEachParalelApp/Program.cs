@@ -12,33 +12,18 @@ namespace ForEachParalelApp
     {
         static void Main(string[] args)
         {
-            Stopwatch sw = new Stopwatch();
-            string pictures = @"C:\Users\berka\Desktop\pictures";
+            long totalyte = 0;
 
-            var files = Directory.GetFiles(pictures);
+            var files = Directory.GetFiles(@"C:\Users\berka\Desktop\pictures");
 
-            Parallel.ForEach(files, (item) =>
+            Parallel.For(0, files.Length, (index) =>
             {
-                Console.WriteLine("thread no:" + Thread.CurrentThread);
-                Image img = new Bitmap(item);
-                var thumbnail = img.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
-                thumbnail.Save(Path.Combine(pictures, "thumbnail", Path.GetFileName(item)));
+                var file = new FileInfo(files[index]);
+                Interlocked.Add(ref totalyte, file.Length);
             });
-            sw.Stop();
-            Console.WriteLine("işlem bitti" + sw.ElapsedMilliseconds);
-            sw.Reset();
-            sw.Start();
-            files.ToList().ForEach(f =>
-            {
-                Console.WriteLine("thread no:" + Thread.CurrentThread);
-                Image img = new Bitmap(f);
-                var thumbnail = img.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
-                thumbnail.Save(Path.Combine(pictures, "thumbnail", Path.GetFileName(f)));
-            });
-            sw.Stop();
-            Console.WriteLine("işlem bitti" + sw.ElapsedMilliseconds);
+
+            Console.WriteLine("Total Byte :" +totalyte.ToString());
 
         }
-
     }
 }

@@ -12,17 +12,20 @@ namespace ForEachParalelApp
     {
         static void Main(string[] args)
         {
-            long totalyte = 0;
+            int total = 0;
+            Parallel.ForEach(Enumerable.Range(1, 100).ToList(), () => 0, (x, loop, subTotal) =>
+              {
+                  subTotal += x;
+                  return subTotal;
+              }, (y) => Interlocked.Add(ref total, y));
+            Console.WriteLine(total);
 
-            var files = Directory.GetFiles(@"C:\Users\berka\Desktop\pictures");
+            Parallel.For(0, 100, () => 0, (x, loop, subTotal) =>
+              {
+                  subTotal += x;
+                  return subTotal;
 
-            Parallel.For(0, files.Length, (index) =>
-            {
-                var file = new FileInfo(files[index]);
-                Interlocked.Add(ref totalyte, file.Length);
-            });
-
-            Console.WriteLine("Total Byte :" +totalyte.ToString());
+              },(y) => Interlocked.Add(ref total,y));
 
         }
     }

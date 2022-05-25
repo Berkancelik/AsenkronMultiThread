@@ -35,11 +35,9 @@ namespace PLINQ.App
             //    Console.WriteLine(x.Name);
             //});
 
-            context.Products.AsParallel().WithDegreeOfParallelism((int)ParallelExecutionMode.ForceParallelism).ForAll(p =>
-            {
-                WriteLog(p);
+            context.Products.AsParallel().AsOrdered().Where(P=> P.ListPrice > 10M).ToList().ForEach(x=>{
+                Console.WriteLine($"{x.Name} - {x.ListPrice}");
             });
-
 
 
         }

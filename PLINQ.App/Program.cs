@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PLINQ.App.Models;
+using System;
 using System.Linq;
 using System.Threading;
 
@@ -6,39 +7,18 @@ namespace PLINQ.App
 {
     internal class Program
     {
-
-
-        private static  bool Islem(int x)
-        {
-            return x % 2 == 0;
-        }
+      
 
         static void Main(string[] args)
         {
-            var arrays = Enumerable.Range(1, 100).ToList();
+            AdventureWorks2017Context context = new AdventureWorks2017Context();
 
-            //100 5 thread
-            // 1 therad 1-20 2 4 6
-            // 2 therad 21-40 22 24 26
-            arrays.Where(x=> x % 2 == 0).ToList().ForEach(x =>
+            context.Products.Take(10).ToList().ForEach(x =>
             {
-                Console.WriteLine(x);
+                Console.WriteLine(x.Name);
             });
 
-            var newArray = arrays.AsParallel().Where(Islem);
 
-            newArray.ForAll(x =>
-            {
-                Thread.Sleep(500);
-                Console.WriteLine(x);
-            });            
-
-
-
-            newArray.ToList().ForEach(x =>
-            {
-                Console.WriteLine(x);
-            });
 
         }
     }

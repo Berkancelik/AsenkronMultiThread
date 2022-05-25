@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 
 namespace PLINQ.App
 {
@@ -25,6 +26,14 @@ namespace PLINQ.App
             });
 
             var newArray = arrays.AsParallel().Where(Islem);
+
+            newArray.ForAll(x =>
+            {
+                Thread.Sleep(500);
+                Console.WriteLine(x);
+            });            
+
+
 
             newArray.ToList().ForEach(x =>
             {

@@ -35,7 +35,7 @@ namespace PLINQ.App
             //    Console.WriteLine(x.Name);
             //});
 
-            context.Products.AsParallel().ForAll(p =>
+            context.Products.AsParallel().WithDegreeOfParallelism(2).ForAll(p =>
             {
                 WriteLog(p);
             });

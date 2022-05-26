@@ -7,38 +7,51 @@ namespace PLINQ.App
 {
     internal class Program
     {
-      
-        private static void WriteLog(Product p)
+
+        private static bool isTrue(Product p)
         {
-            // log a yazdık
-            Console.WriteLine(p.Name + " Log'a KAydedildi");
+            try
+            {
+                return p.Name[2] == 'a';
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("Dizi sınırları aşıldı");
+                return false;
+            }
         }
 
         static void Main(string[] args)
         {
-            AdventureWorks2017Context context = new AdventureWorks2017Context();
+            AdventureWorks2017Context content = new AdventureWorks2017Context();
 
-            // elimde var olan array üzerinde bir sogu yazmak ister isek
-            //complex sorgular var ise aşağıdaki sorgu çeşidi kullanılmaktadır.
-            // kod kadar okunabilirlik de çk önemlidir.
-            // SQL Server sorgusu
-            //var product = (from p in context.Products.AsParallel()
-            //              where p.ListPrice >10M
-            //              select p).Take(10);
+            var product = content.Products.Take(100).ToArray();
 
-            // Tek satır sorgu
-            //var product2 = context.Products.AsParallel().Where(p => p.ListPrice >10M).Take(10);
+            product[3].Name = "##";
+            //ahmet
+            var query = product.AsParallel().Where(p => p.Name[2] == 'a');
 
+            try
+            {
+                query.ForAll(x =>
+                {
+                    Console.WriteLine( $"{x.Name}");
+                });
+            }
+            //birden fazla exception yakalabilmektedir
+            catch (AggregateException ex)
+            {
 
-            //product.ForAll(x =>
-            //{
-            //    Console.WriteLine(x.Name);
-            //});
+                ex.InnerExceptions.ToList().ForEach(x =>
+                {
+                    if (x is IndexOutOfRangeException)
+                    {
+                        Console.WriteLine($"Hata : array sınırları dışına çıktınız");
 
-            context.Products.AsParallel().AsOrdered().Where(P=> P.ListPrice > 10M).ToList().ForEach(x=>{
-                Console.WriteLine($"{x.Name} - {x.ListPrice}");
-            });
-
+                    }
+                });
+            }
 
         }
     }

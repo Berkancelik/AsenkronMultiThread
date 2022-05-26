@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEachParalelApp", "ForEac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelForAndForEachConcellationApp", "ParallelForAndForEachConcellationApp\ParallelForAndForEachConcellationApp.csproj", "{82FF8C30-97A9-4F2C-9D95-E8812A8C08D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLINQ.App", "PLINQ.App\PLINQ.App.csproj", "{D9B51050-B09C-4FFA-BA58-97BA4A6B34FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PLINQ.App", "PLINQ.App\PLINQ.App.csproj", "{D9B51050-B09C-4FFA-BA58-97BA4A6B34FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLinqApp", "PLinqApp\PLinqApp.csproj", "{C7E348D8-22B4-41E6-BB66-C3D50BAFE3E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{D9B51050-B09C-4FFA-BA58-97BA4A6B34FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9B51050-B09C-4FFA-BA58-97BA4A6B34FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9B51050-B09C-4FFA-BA58-97BA4A6B34FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7E348D8-22B4-41E6-BB66-C3D50BAFE3E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7E348D8-22B4-41E6-BB66-C3D50BAFE3E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7E348D8-22B4-41E6-BB66-C3D50BAFE3E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7E348D8-22B4-41E6-BB66-C3D50BAFE3E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
